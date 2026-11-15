@@ -23,7 +23,7 @@
             </div>
 
             <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
-                <a href="{{ SiteSetting::get('ga4_dashboard_url', 'https://analytics.google.com/') }}" target="_blank"
+                <a href="{{ $ga4DashboardUrl ?? 'https://analytics.google.com/' }}" target="_blank"
                    style="display: inline-flex; align-items: center; gap: 8px; background-color: #ffffff; color: #0f172a; padding: 9px 16px; border-radius: 10px; font-size: 12.5px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.15s ease;">
                     <svg style="width: 16px; height: 16px; color: #f59e0b;" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
@@ -32,7 +32,7 @@
                     <svg style="width: 12px; height: 12px; color: #64748b;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </a>
 
-                <a href="{{ SiteSetting::get('gsc_dashboard_url', 'https://search.google.com/search-console') }}" target="_blank"
+                <a href="{{ $gscDashboardUrl ?? 'https://search.google.com/search-console' }}" target="_blank"
                    style="display: inline-flex; align-items: center; gap: 8px; background-color: rgba(255, 255, 255, 0.16); color: #ffffff; padding: 9px 16px; border-radius: 10px; font-size: 12.5px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.28); backdrop-filter: blur(8px);">
                     <svg style="width: 16px; height: 16px; color: #bae6fd;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

@@ -262,6 +262,8 @@ class ManageAnalytics extends Page implements HasForms
     public function getViewData(): array
     {
         return [
+            'ga4DashboardUrl' => SiteSetting::get('ga4_dashboard_url', 'https://analytics.google.com/'),
+            'gscDashboardUrl' => SiteSetting::get('gsc_dashboard_url', 'https://search.google.com/search-console'),
             'metrics' => [
                 'totalClicks' => '1,890',
                 'totalImpressions' => '24,300',
