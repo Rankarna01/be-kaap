@@ -76,7 +76,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                \App\Filament\Widgets\DashboardBannerWidget::class,
                 \App\Filament\Widgets\StatsOverviewWidget::class,
                 \App\Filament\Widgets\AnalyticsOverviewWidget::class,
                 \App\Filament\Widgets\RecentSubmissionsWidget::class,

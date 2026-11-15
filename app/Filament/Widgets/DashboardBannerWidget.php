@@ -7,6 +7,11 @@ use Filament\Widgets\Widget;
 
 class DashboardBannerWidget extends Widget
 {
+    public static function canView(): bool
+    {
+        return false;
+    }
+
     protected static string $view = 'filament.widgets.dashboard-banner-widget';
 
     protected int | string | array $columnSpan = 'full';
