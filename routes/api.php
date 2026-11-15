@@ -43,6 +43,10 @@ Route::middleware([CorsForFrontend::class])->prefix('v1')->group(function () {
     // 9. Lowongan Karir
     Route::get('/careers', [CareerController::class, 'index']);
 
-    // 10. Form Kontak & Permintaan Konsultasi / RFP (POST)
+    // 10. Daftar Klien & Portofolio
+    Route::get('/clients', [\App\Http\Controllers\Api\ClientController::class, 'index']);
+    Route::get('/clients/{slug}', [\App\Http\Controllers\Api\ClientController::class, 'show']);
+
+    // 11. Form Kontak & Permintaan Konsultasi / RFP (POST)
     Route::post('/contact', [ContactSubmissionController::class, 'store']);
 });
