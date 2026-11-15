@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GalleryResource\Pages;
 use App\Models\Gallery;
+use App\Models\GalleryCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,7 +25,7 @@ class GalleryResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Galeri Kegiatan';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -33,18 +34,47 @@ class GalleryResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->label('Judul Foto / Kegiatan')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->placeholder('Contoh: Kegiatan Penugasan Audit Lapangan'),
 
-                Forms\Components\Select::make('category')
+                Forms\Components\Select::make('category_id')
                     ->label('Kategori')
-                    ->options([
-                        'Audit Lapangan' => 'Audit Lapangan',
-                        'Pelatihan & CPD' => 'Pelatihan & CPD',
-                        'Kegiatan Kantor' => 'Kegiatan Kantor',
-                        'Visitasi Klien' => 'Visitasi Klien',
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nama Kategori Baru')
+                            ->required()
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('slug', \Illuminate\Support\Str::slug($state))),
+                        Forms\Components\TextInput::make('slug')
+                            ->label('URL Slug')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('order_priority')
+                            ->label('Urutan Prioritas')
+                            ->numeric()
+                            ->default(0),
                     ])
-                    ->default('Audit Lapangan')
-                    ->required(),
+                    ->createOptionAction(function (Forms\Components\Actions\Action $action) {
+                        return $action
+                            ->modalHeading('Tambah Kategori Galeri Baru')
+                            ->modalSubmitActionLabel('Simpan & Gunakan');
+                    })
+                    ->editOptionForm([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nama Kategori')
+                            ->required(),
+                        Forms\Components\TextInput::make('slug')
+                            ->label('Slug')
+                            ->required(),
+                        Forms\Components\TextInput::make('order_priority')
+                            ->label('Urutan')
+                            ->numeric(),
+                    ]),
 
                 Forms\Components\FileUpload::make('image_path')
                     ->label('File Foto')
@@ -54,7 +84,8 @@ class GalleryResource extends Resource
                     ->disk('public'),
 
                 Forms\Components\DatePicker::make('activity_date')
-                    ->label('Tanggal Kegiatan'),
+                    ->label('Tanggal Kegiatan')
+                    ->default(now()),
 
                 Forms\Components\Textarea::make('description')
                     ->label('Keterangan Singkat')
@@ -84,9 +115,10 @@ class GalleryResource extends Resource
                     ->label('Judul Kegiatan')
                     ->searchable()
                     ->weight('bold'),
-                Tables\Columns\TextColumn::make('category')
+                Tables\Columns\TextColumn::make('category.name')
                     ->label('Kategori')
-                    ->badge(),
+                    ->badge()
+                    ->color('primary'),
                 Tables\Columns\TextColumn::make('activity_date')
                     ->label('Tanggal')
                     ->date('d M Y'),
@@ -94,13 +126,9 @@ class GalleryResource extends Resource
                     ->label('Aktif'),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('category')
-                    ->options([
-                        'Audit Lapangan' => 'Audit Lapangan',
-                        'Pelatihan & CPD' => 'Pelatihan & CPD',
-                        'Kegiatan Kantor' => 'Kegiatan Kantor',
-                        'Visitasi Klien' => 'Visitasi Klien',
-                    ]),
+                Tables\Filters\SelectFilter::make('category_id')
+                    ->label('Kategori')
+                    ->relationship('category', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
