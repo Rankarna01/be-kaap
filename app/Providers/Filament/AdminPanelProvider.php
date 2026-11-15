@@ -52,6 +52,7 @@ class AdminPanelProvider extends PanelProvider
                 'Publikasi & Wawasan',
                 'Interaksi & Klien',
                 'Media & Informasi',
+                'Analitik & SEO',
                 'Pengaturan Sistem',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
@@ -61,7 +62,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
+                \App\Filament\Widgets\DashboardBannerWidget::class,
+                \App\Filament\Widgets\StatsOverviewWidget::class,
+                \App\Filament\Widgets\AnalyticsOverviewWidget::class,
+                \App\Filament\Widgets\RecentSubmissionsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
