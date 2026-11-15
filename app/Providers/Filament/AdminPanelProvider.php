@@ -28,7 +28,17 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('KAP Drs. Selamat Sinuraya & Rekan')
+            ->brandLogo(asset('images/logo/logo-kaap.jpeg'))
+            ->brandLogoHeight('2.6rem')
             ->favicon('/images/logo/logo-kaap.jpeg')
+            ->sidebarWidth('16rem')
+            ->collapsedSidebarWidth('4.5rem')
+            ->sidebarCollapsibleOnDesktop()
+            ->collapsibleNavigationGroups(true)
+            ->renderHook(
+                \Filament\View\PanelsRenderHook::HEAD_END,
+                fn () => view('filament.custom-styles'),
+            )
             ->colors([
                 'primary' => [
                     50 => '#f0f7fd',
