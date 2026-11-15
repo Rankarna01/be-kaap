@@ -39,10 +39,6 @@ class AdminPanelProvider extends PanelProvider
                 \Filament\View\PanelsRenderHook::HEAD_END,
                 fn () => view('filament.custom-styles'),
             )
-            ->renderHook(
-                \Filament\View\PanelsRenderHook::SIDEBAR_FOOTER,
-                fn () => view('filament.components.sidebar-footer-card'),
-            )
             ->colors([
                 'primary' => [
                     50 => '#f0f7fd',
