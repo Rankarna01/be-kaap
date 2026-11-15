@@ -35,6 +35,11 @@ class LandingPageController extends Controller
             'phone' => SiteSetting::get('phone_primary', '+62 852-7665-3453'),
             'whatsapp' => SiteSetting::get('whatsapp_primary', '6285276653453'),
             'linkedin' => SiteSetting::get('linkedin_url', 'https://www.linkedin.com'),
+            'analytics' => [
+                'ga4_measurement_id' => SiteSetting::get('ga4_measurement_id', 'G-DSSR2026XX'),
+                'gsc_verification_tag' => SiteSetting::get('gsc_verification_tag', 'google-site-verification=KAPDSSR_SearchConsole_Token_2026'),
+                'enable_tracking' => (bool) SiteSetting::get('enable_tracking', true),
+            ],
         ];
 
         $hero = HeroSection::where('is_active', true)->first() ?? new HeroSection([
@@ -95,6 +100,20 @@ class LandingPageController extends Controller
             ->orderBy('order_priority')
             ->get();
 
+        $clients = \App\Models\Client::where('is_active', true)
+            ->orderBy('order_priority')
+            ->get()
+            ->map(fn ($c) => [
+                'id' => $c->id,
+                'company_name' => $c->company_name,
+                'slug' => $c->slug,
+                'logo' => $c->logo ? (str_starts_with($c->logo, 'http') || str_starts_with($c->logo, '/') ? $c->logo : asset('storage/' . $c->logo)) : null,
+                'industry' => $c->industry_sector,
+                'service' => $c->service_provided,
+                'website' => $c->website_url,
+                'show_in_homepage' => (bool) $c->show_in_homepage,
+            ]);
+
         return response()->json([
             'success' => true,
             'data' => [
@@ -126,6 +145,7 @@ class LandingPageController extends Controller
                 ],
                 'faqs' => FaqResource::collection($faqs),
                 'offices' => OfficeResource::collection($offices),
+                'clients' => $clients,
             ],
         ]);
     }
