@@ -114,6 +114,18 @@ class LandingPageController extends Controller
                 'show_in_homepage' => (bool) $c->show_in_homepage,
             ]);
 
+        $bannerLight = $hero->banner_image_light
+            ? (str_starts_with($hero->banner_image_light, 'http') || str_starts_with($hero->banner_image_light, '/')
+                ? $hero->banner_image_light
+                : asset('storage/' . $hero->banner_image_light))
+            : '/images/hero/hero-img.jpg';
+
+        $bannerDark = $hero->banner_image_dark
+            ? (str_starts_with($hero->banner_image_dark, 'http') || str_starts_with($hero->banner_image_dark, '/')
+                ? $hero->banner_image_dark
+                : asset('storage/' . $hero->banner_image_dark))
+            : ($bannerLight !== '/images/hero/hero-img.jpg' ? $bannerLight : '/images/hero/hero-img-dark.png');
+
         return response()->json([
             'success' => true,
             'data' => [
@@ -131,8 +143,13 @@ class LandingPageController extends Controller
                         'url' => $hero->cta_secondary_url,
                         'active' => (bool) $hero->cta_secondary_active,
                     ],
-                    'banner_image_light' => $hero->banner_image_light ? (str_starts_with($hero->banner_image_light, 'http') || str_starts_with($hero->banner_image_light, '/') ? $hero->banner_image_light : asset('storage/' . $hero->banner_image_light)) : '/images/hero/hero-img.jpg',
-                    'banner_image_dark' => $hero->banner_image_dark ? (str_starts_with($hero->banner_image_dark, 'http') || str_starts_with($hero->banner_image_dark, '/') ? $hero->banner_image_dark : asset('storage/' . $hero->banner_image_dark)) : '/images/hero/hero-img-dark.png',
+                    'banner_image_light' => $bannerLight,
+                    'banner_image_dark' => $bannerDark,
+                    'image_url' => $bannerLight,
+                    'cta_primary_label' => $hero->cta_primary_label,
+                    'cta_primary_link' => $hero->cta_primary_url,
+                    'cta_secondary_label' => $hero->cta_secondary_label,
+                    'cta_secondary_link' => $hero->cta_secondary_url,
                 ],
                 'stats' => $stats,
                 'core_features' => ServiceResource::collection($services->where('show_in_core_features', true)),
