@@ -96,6 +96,7 @@ class ArticleResource extends Resource
                                     ->label('Foto Sampul')
                                     ->directory('articles')
                                     ->image()
+                                    ->imageEditor()
                                     ->disk('public'),
 
                                 Forms\Components\TextInput::make('author')

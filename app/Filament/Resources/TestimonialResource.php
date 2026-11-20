@@ -56,6 +56,7 @@ class TestimonialResource extends Resource
                             ->label('Foto Klien (Opsional)')
                             ->directory('testimonials')
                             ->image()
+                            ->imageEditor()
                             ->disk('public'),
                     ])->columns(2),
 

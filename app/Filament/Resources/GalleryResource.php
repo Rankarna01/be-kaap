@@ -80,6 +80,7 @@ class GalleryResource extends Resource
                     ->label('File Foto')
                     ->directory('galleries')
                     ->image()
+                    ->imageEditor()
                     ->required()
                     ->disk('public'),
 

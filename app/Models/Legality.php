@@ -15,6 +15,7 @@ class Legality extends Model
         'license_number',
         'description',
         'file_path',
+        'logo',
         'order_priority',
         'is_active',
     ];

@@ -52,6 +52,12 @@ class LegalityResource extends Resource
                     ->rows(3)
                     ->columnSpanFull(),
 
+                Forms\Components\FileUpload::make('logo')
+                    ->label('Logo Lembaga / Penerbit')
+                    ->directory('legalities')
+                    ->image()
+                    ->imageEditor()
+                    ->disk('public'),
                 Forms\Components\FileUpload::make('file_path')
                     ->label('File Lampiran / PDF (Opsional)')
                     ->directory('legalities')

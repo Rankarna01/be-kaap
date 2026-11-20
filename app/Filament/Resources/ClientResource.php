@@ -92,6 +92,7 @@ class ClientResource extends Resource
                             ->label('Logo Perusahaan')
                             ->directory('clients')
                             ->image()
+                            ->imageEditor()
                             ->imageResizeMode('contain')
                             ->imageCropAspectRatio('16:9')
                             ->disk('public')

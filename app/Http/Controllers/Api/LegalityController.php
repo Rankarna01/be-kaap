@@ -20,6 +20,7 @@ class LegalityController extends Controller
                 'license_number' => $l->license_number,
                 'desc' => $l->description,
                 'file_url' => $l->file_path ? asset('storage/' . $l->file_path) : null,
+                'logo' => $l->logo ? asset('storage/' . $l->logo) : null,
             ]);
 
         return response()->json([

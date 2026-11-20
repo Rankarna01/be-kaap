@@ -95,11 +95,13 @@ class ManageHeroSection extends Page implements HasForms
                             ->label('Gambar Banner (Mode Terang / Light)')
                             ->directory('hero-banners')
                             ->image()
+                            ->imageEditor()
                             ->disk('public'),
                         FileUpload::make('banner_image_dark')
                             ->label('Gambar Banner (Mode Gelap / Dark)')
                             ->directory('hero-banners')
                             ->image()
+                            ->imageEditor()
                             ->disk('public'),
                         Toggle::make('is_active')
                             ->label('Tampilkan Hero Section di Website')

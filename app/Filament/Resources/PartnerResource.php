@@ -73,6 +73,7 @@ class PartnerResource extends Resource
                             ->helperText('Jika dikosongkan, sistem akan otomatis menampilkan Modern Executive Vector Avatar.')
                             ->directory('partners')
                             ->image()
+                            ->imageEditor()
                             ->disk('public'),
 
                         Forms\Components\TextInput::make('order_priority')

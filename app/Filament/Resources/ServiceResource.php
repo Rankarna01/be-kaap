@@ -83,6 +83,7 @@ class ServiceResource extends Resource
                             ->label('Gambar / 3D Mascot')
                             ->directory('services')
                             ->image()
+                            ->imageEditor()
                             ->disk('public'),
 
                         Forms\Components\TextInput::make('icon_name')
