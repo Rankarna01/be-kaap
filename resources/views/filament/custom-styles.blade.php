@@ -151,4 +151,18 @@
     .fi-sidebar-item.fi-active .fi-sidebar-item-icon {
         color: #0369b1 !important;
     }
+
+    /* -------------------------------------------------------------
+     * Dashboard stat cards: smaller, calmer typography and charts
+     * ------------------------------------------------------------- */
+    .fi-wi-stats-overview-stats-ctn { gap: 14px !important; }
+    .fi-wi-stats-overview-stat { padding: 1rem 1.1rem !important; border-radius: 16px !important; }
+    .fi-wi-stats-overview-stat-label { font-size: .72rem !important; font-weight: 600 !important; letter-spacing: .01em; }
+    .fi-wi-stats-overview-stat-value { font-size: 1.15rem !important; line-height: 1.3 !important; font-weight: 700 !important; letter-spacing: -.01em; }
+    .fi-wi-stats-overview-stat-description { font-size: .7rem !important; line-height: 1.4 !important; }
+    .fi-wi-stats-overview-stat-description-icon { width: .95rem !important; height: .95rem !important; }
+    .fi-wi-stats-overview-stat-chart { height: 38px !important; margin-top: .5rem !important; opacity: .85; }
+    .fi-wi-stats-overview-stat-chart canvas { height: 38px !important; }
+    .fi-wi-stats-overview-header-heading { font-size: .875rem !important; }
+    .fi-wi-stats-overview-header-description { font-size: .75rem !important; }
 </style>
