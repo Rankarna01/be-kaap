@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->darkMode(false)
             ->brandName('KAP Drs. Selamat Sinuraya & Rekan')
             ->brandLogo(asset('images/logo/logo-kaap.jpeg'))
             ->brandLogoHeight('2.6rem')
